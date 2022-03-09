@@ -35,7 +35,7 @@ public class UserController {
 	    	user.setUserName(userName);
 	    	user.setPassWord(passWord);
 	    	int id = userMapper.save(user);
-	    	if(id == 1) return "success";
+	    	if (id == 1) return "success";
 	        return "fail";
 	    }
 	    
@@ -50,7 +50,7 @@ public class UserController {
 			newsContent.setUserName(userName);
 			newsContent.setDate(formatter.format(date));
 			int id = newsContentMapper.save(newsContent);
-			if(id == 1) return "success";
+			if (id == 1) return "success";
 	        return "fail";
 		}
 	  	
