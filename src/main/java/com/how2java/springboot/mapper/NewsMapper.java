@@ -13,12 +13,12 @@ import com.how2java.springboot.pojo.User;
 
 //用于数据库增删改查
 @Mapper
-public interface NewsContentMapper {
+public interface NewsMapper {
 	
-	@Select("select * from news_content ")
+	@Select("select * from news_content order by date desc")
     List<NewsContent> findAll();
      
-    @Insert(" insert into news_content ( username, newscontent, date ) values (#{userName}, #{newsContent}, #{date}) ")
+    @Insert(" insert into news_content ( username, title, newscontent, date ) values (#{userName}, #{title}, #{newsContent}, #{date}) ")
     public int save(NewsContent newsContent); 
      
     @Delete(" delete from news_content where id= #{id} ")
@@ -30,7 +30,7 @@ public interface NewsContentMapper {
     @Select("select * from news_content where username= #{userName} ")
     public NewsContent getMany(String userName); //获取该用户所有的文章
        
-    @Update("update news_content set newscontent=#{newsContent}, date=#{date} where id=#{id} ")
+    @Update("update news_content set title=#{title}, newscontent=#{newsContent}, date=#{date} where id=#{id} ")
     public int update(NewsContent newsContent); 
     
 }
