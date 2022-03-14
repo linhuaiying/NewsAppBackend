@@ -28,7 +28,7 @@ public interface NewsMapper {
     public NewsContent get(String id); //获取某一条文章
     
     @Select("select * from news_content where username= #{userName} ")
-    public NewsContent getMany(String userName); //获取该用户所有的文章
+    public List<NewsContent> getMany(String userName); //获取该用户所有的文章
        
     @Update("update news_content set title=#{title}, newscontent=#{newsContent}, date=#{date} where id=#{id} ")
     public int update(NewsContent newsContent); 

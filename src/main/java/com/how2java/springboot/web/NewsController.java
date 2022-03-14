@@ -39,4 +39,11 @@ public class NewsController {
 		List<NewsContent> newsList = newsMapper.findAll();
 		return newsList;
 	}
+    
+    //返回个人新闻内容
+    @GetMapping("/news/getMyNewsList")
+    public List<NewsContent> getMyNewsList(@RequestParam(value = "username", defaultValue = "") String username) {
+		List<NewsContent> newsList = newsMapper.getMany(username);
+		return newsList;
+	}
 }
