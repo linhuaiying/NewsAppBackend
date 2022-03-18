@@ -37,5 +37,23 @@ public class UserController {
 	    	if (id == 1) return "success";
 	        return "fail";
 	    }
+	    
+	    @PostMapping("/user/update")
+	    public String update(@RequestParam("username") String userName,@RequestParam("nickname") String nickName, @RequestParam("sex") String sex, @RequestParam("sign") String sign) throws Exception {
+	    	User user = new User();
+	    	user.setUserName(userName);
+	    	user.setNickName(nickName);
+	    	user.setSex(sex);
+	    	user.setSign(sign);
+	    	int id = userMapper.update(user);
+	    	if (id == 1) return "success";
+	        return "fail";
+	    }
+	    
+	    @PostMapping("/user/get")
+	    public User getUser(@RequestParam("username") String userName) throws Exception {
+	    	User user = userMapper.get(userName);
+	    	return user;
+	    }
 	  	
 }

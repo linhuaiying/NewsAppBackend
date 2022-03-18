@@ -27,7 +27,9 @@ public interface UserMapper {
     @Select("select * from user_ where username= #{userName} ")
     public User get(String userName);
        
-    @Update("update user_ set password=#{password} where username=#{userName} ")
-    public int update(User user);  //更改密码
+    @Update("update user_ set nickname=#{nickName}, sex=#{sex}, sign=#{sign} where username=#{userName} ")
+    public int update(User user);  //更改用户信息
+    
+    
     
 }
