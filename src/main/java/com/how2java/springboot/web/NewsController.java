@@ -21,7 +21,7 @@ public class NewsController {
     @PostMapping("/news/sendNewsContent")
     public String uploadNewsContent(@RequestParam("title") String title, @RequestParam("newscontent") String content, @RequestParam("username") String userName) {
 		NewsContent newsContent = new NewsContent();
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
 		Date date = new Date(System.currentTimeMillis());
 		System.out.println(formatter.format(date));
 		newsContent.setNewsContent(content);

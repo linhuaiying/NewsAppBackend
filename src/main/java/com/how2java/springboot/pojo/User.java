@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" }) 
 public class User {
-   String userName = "";
-   String passWord = "";
-   String nickName = "";
-   String sex = "";
-   String sign = "";
+   String userName;
+   String passWord;
+   String nickName;
+   String sex;
+   String sign;
    
    public String getUserName() {
 	   return this.userName;
