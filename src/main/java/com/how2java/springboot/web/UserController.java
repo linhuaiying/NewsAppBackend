@@ -27,6 +27,7 @@ import com.how2java.springboot.pojo.User;
 @RestController
 public class UserController {
 	@Autowired UserMapper userMapper;
+	@Autowired NewsMapper newsMapper;
 	
 	    @PostMapping("/user/save")
 	    public String save(@RequestParam("username") String userName,@RequestParam("password") String passWord) throws Exception {
@@ -46,7 +47,8 @@ public class UserController {
 	    	user.setSex(sex);
 	    	user.setSign(sign);
 	    	int id = userMapper.update(user);
-	    	if (id == 1) return "success";
+	    	int id2 = newsMapper.updateNickName(user);
+	    	if (id == 1 && id2 != 0) return "success";
 	        return "fail";
 	    }
 	    

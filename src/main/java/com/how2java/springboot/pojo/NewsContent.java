@@ -8,6 +8,7 @@ public class NewsContent {
     String newsContent;
     String date;
     String title;
+    String nickName;
     int id;
     
     public String getUserName() {
@@ -16,6 +17,14 @@ public class NewsContent {
     
     public void setUserName(String userName) {
  	   this.userName = userName;
+    }
+    
+    public String getNickName() {
+  	   return this.nickName;
+    }
+     
+    public void setNickName(String nickName) {
+  	   this.nickName = nickName;
     }
     
     public String getNewsContent() {

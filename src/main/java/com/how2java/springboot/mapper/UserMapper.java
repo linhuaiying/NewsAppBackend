@@ -30,6 +30,7 @@ public interface UserMapper {
     @Update("update user_ set nickname=#{nickName}, sex=#{sex}, sign=#{sign} where username=#{userName} ")
     public int update(User user);  //更改用户信息
     
-    
+    @Select("select nickname from user_ where username= #{userName} ")
+    public String getNickName(String userName);
     
 }

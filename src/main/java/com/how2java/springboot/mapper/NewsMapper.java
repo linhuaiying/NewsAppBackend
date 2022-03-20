@@ -18,7 +18,7 @@ public interface NewsMapper {
 	@Select("select * from news_content order by date desc")
     List<NewsContent> findAll();
      
-    @Insert(" insert into news_content ( username, title, newscontent, date ) values (#{userName}, #{title}, #{newsContent}, #{date}) ")
+    @Insert(" insert into news_content ( username, nickname, title, newscontent, date ) values (#{userName}, #{nickName}, #{title}, #{newsContent}, #{date}) ")
     public int save(NewsContent newsContent); 
      
     @Delete(" delete from news_content where id= #{id} ")
@@ -32,5 +32,8 @@ public interface NewsMapper {
        
     @Update("update news_content set title=#{title}, newscontent=#{newsContent}, date=#{date} where id=#{id} ")
     public int update(NewsContent newsContent); 
+    
+    @Update("update news_content set nickname=#{nickName} where username=#{userName} ")
+    public int updateNickName(User user);//更新昵称
     
 }

@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.how2java.springboot.mapper.NewsMapper;
+import com.how2java.springboot.mapper.UserMapper;
 import com.how2java.springboot.pojo.NewsContent;
 
 @RestController
 public class NewsController {
 	@Autowired NewsMapper newsMapper;
+	@Autowired UserMapper userMapper;
 	
 	//接收新闻内容
     @PostMapping("/news/sendNewsContent")
@@ -24,10 +26,13 @@ public class NewsController {
 		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
 		Date date = new Date(System.currentTimeMillis());
 		System.out.println(formatter.format(date));
+		String nickName = userMapper.getNickName(userName);
 		newsContent.setNewsContent(content);
 		newsContent.setUserName(userName);
 		newsContent.setDate(formatter.format(date));
 		newsContent.setTitle(title);
+		newsContent.setNickName(nickName);
+		System.out.println(nickName);
 		int id = newsMapper.save(newsContent);
 		if (id == 1) return "success";
        return "fail";
