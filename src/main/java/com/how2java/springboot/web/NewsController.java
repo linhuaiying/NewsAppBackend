@@ -32,7 +32,6 @@ public class NewsController {
 		newsContent.setDate(formatter.format(date));
 		newsContent.setTitle(title);
 		newsContent.setNickName(nickName);
-		System.out.println(nickName);
 		int id = newsMapper.save(newsContent);
 		if (id == 1) return "success";
        return "fail";
