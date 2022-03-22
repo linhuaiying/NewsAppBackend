@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.how2java.springboot.mapper.CategoryMapper;
+import com.how2java.springboot.mapper.CommentMapper;
 import com.how2java.springboot.mapper.NewsMapper;
 import com.how2java.springboot.mapper.UserMapper;
 import com.how2java.springboot.pojo.Category;
@@ -28,6 +29,7 @@ import com.how2java.springboot.pojo.User;
 public class UserController {
 	@Autowired UserMapper userMapper;
 	@Autowired NewsMapper newsMapper;
+	@Autowired CommentMapper commentMapper;
 	
 	    @PostMapping("/user/save")
 	    public String save(@RequestParam("username") String userName,@RequestParam("password") String passWord) throws Exception {
@@ -47,8 +49,9 @@ public class UserController {
 	    	user.setSex(sex);
 	    	user.setSign(sign);
 	    	int id = userMapper.update(user);
-	    	int id2 = newsMapper.updateNickName(user);
-	    	if (id == 1 && id2 != 0) return "success";
+	    	newsMapper.updateNickName(user);
+	    	commentMapper.updateNickName(user);
+	    	if (id == 1) return "success";
 	        return "fail";
 	    }
 	    

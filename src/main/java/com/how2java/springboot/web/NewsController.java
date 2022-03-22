@@ -34,7 +34,7 @@ public class NewsController {
 		newsContent.setNickName(nickName);
 		int id = newsMapper.save(newsContent);
 		if (id == 1) return "success";
-       return "fail";
+        return "fail";
 	}
     
     //返回新闻内容
