@@ -50,4 +50,11 @@ public class NewsController {
 		List<NewsContent> newsList = newsMapper.getMany(username);
 		return newsList;
 	}
+    
+  //删除新闻
+    @PostMapping("/news/deleteNews")
+    public String deletNews(@RequestParam("newsId") int newsId) {
+		newsMapper.delete(newsId);
+		return "success";
+	}
 }

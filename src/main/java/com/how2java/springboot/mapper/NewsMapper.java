@@ -22,7 +22,7 @@ public interface NewsMapper {
     public int save(NewsContent newsContent); 
      
     @Delete(" delete from news_content where id= #{id} ")
-    public void delete(String id);
+    public void delete(int id);
          
     @Select("select * from news_content where id= #{id} ")
     public NewsContent get(String id); //获取某一条文章
