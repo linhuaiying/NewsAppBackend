@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.how2java.springboot.mapper.NewsMapper;
 import com.how2java.springboot.mapper.UserMapper;
+import com.how2java.springboot.pojo.FavNews;
 import com.how2java.springboot.pojo.NewsContent;
 
 @RestController
@@ -56,5 +57,11 @@ public class NewsController {
     public String deletNews(@RequestParam("newsId") int newsId) {
 		newsMapper.delete(newsId);
 		return "success";
+	}
+    
+    @GetMapping("/news/getFavNewsList")
+    public List<NewsContent> getFavNewsList(@RequestParam(value = "username", defaultValue = "") String userName) {
+    	List<NewsContent> newsList = newsMapper.getFavNews(userName);
+		return newsList;
 	}
 }

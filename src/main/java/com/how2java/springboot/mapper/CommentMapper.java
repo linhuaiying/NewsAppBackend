@@ -20,6 +20,4 @@ public interface CommentMapper {
     @Insert(" insert into comment ( username, nickname, content, newsId ) values (#{userName}, #{nickName}, #{content}, #{newsId}) ")
     public int save(Comment comment); 
     
-    @Update("update comment set nickname=#{nickName} where username=#{userName} ")
-    public int updateNickName(User user);
 }

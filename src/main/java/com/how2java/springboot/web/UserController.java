@@ -49,8 +49,6 @@ public class UserController {
 	    	user.setSex(sex);
 	    	user.setSign(sign);
 	    	int id = userMapper.update(user);
-	    	newsMapper.updateNickName(user);
-	    	commentMapper.updateNickName(user);
 	    	if (id == 1) return "success";
 	        return "fail";
 	    }

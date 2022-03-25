@@ -32,8 +32,7 @@ public interface NewsMapper {
        
     @Update("update news_content set title=#{title}, newscontent=#{newsContent}, date=#{date} where id=#{id} ")
     public int update(NewsContent newsContent); 
-    
-    @Update("update news_content set nickname=#{nickName} where username=#{userName} ")
-    public int updateNickName(User user);//更新昵称
-    
+
+    @Select("select * from news_content where id in ( select newsId from fav_news where username = #{userName} ) ")
+    public List<NewsContent> getFavNews(String userName);
 }
