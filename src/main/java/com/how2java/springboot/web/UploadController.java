@@ -76,6 +76,30 @@ public class UploadController {
             //返回图片的网络地址给前端
             return pathList;
     }
+    
+  //接收文件和用户名，并返回文件地址
+    @RequestMapping(value = "/uploadOne", method = RequestMethod.POST)
+    public String uploadOne(HttpServletRequest req, @RequestParam("file") MultipartFile file, @RequestParam("username") String userName) {
+    	   String fileName = "";
+           try {           
+            	fileName = System.currentTimeMillis()+file.getOriginalFilename();
+                String destFileName=req.getServletContext().getRealPath("")+"uploaded"+File.separator+fileName;
+                String destFileName2=req.getServletContext().getRealPath("")+"imags"+File.separator+fileName;
+                File destFile = new File(destFileName);
+                destFile.getParentFile().mkdirs();
+                file.transferTo(destFile);
+                Thumbnails.of(destFileName) //原图地址
+                .scale(1) //保持原图
+                .outputQuality(1f) //保持质量
+                .rotate(getRotateAngleForPhoto(destFileName)) //旋转图片
+                .toFile(destFileName2); //目标地址    
+            } catch (FileNotFoundException e) {
+               e.printStackTrace();
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+          return "http://" + req.getServerName() + ":" + req.getServerPort() + "/" + "imags/" + fileName;
+    }
   	 
   	/**
       * 获取图片正确显示需要旋转的角度（顺时针）
