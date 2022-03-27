@@ -9,6 +9,7 @@ public class User {
    String nickName;
    String sex;
    String sign;
+   String userIcon;
    
    public String getUserName() {
 	   return this.userName;
@@ -50,8 +51,16 @@ public class User {
 	   this.sign = sign;
    }
    
+   public String getUserIcon() {
+	   return this.userIcon;
+   }
+   
+   public void setUserIcon(String userIcon) {
+	   this.userIcon = userIcon;
+   }
+   
    @Override
    public String toString() {
-       return "User [username=" + userName + ", password=" + passWord + ", nickName=" + nickName + ", sex=" + sex + ", sign=" + sign + "]";
+       return "User [username=" + userName + ", password=" + passWord + ", nickName=" + nickName + ", sex=" + sex + ", sign=" + sign + ", userIcon=" + userIcon + "]";
    }
 }

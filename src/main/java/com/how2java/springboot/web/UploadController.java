@@ -21,6 +21,7 @@ import javax.imageio.ImageReader;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.plaf.basic.BasicFormattedTextFieldUI;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,12 +38,15 @@ import com.drew.metadata.MetadataException;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.exif.ExifImageDirectory;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.how2java.springboot.mapper.UserMapper;
+import com.how2java.springboot.pojo.User;
 
 import net.coobird.thumbnailator.Thumbnails;
   
 //该注解表示返回数据给前端
 @RestController
 public class UploadController {
+	@Autowired UserMapper userMapper;
 
 	//接收多个文件，并返回文件地址
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -63,7 +67,6 @@ public class UploadController {
                      .outputQuality(1f) //保持质量
                      .rotate(getRotateAngleForPhoto(destFileName)) //旋转图片
                      .toFile(destFileName2); //目标地址
-
                      pathList.add("http://" + req.getServerName() + ":" + req.getServerPort() + "/" + "imags/" + fileName);
             	}
                  
@@ -79,8 +82,9 @@ public class UploadController {
     
   //接收文件和用户名，并返回文件地址
     @RequestMapping(value = "/uploadOne", method = RequestMethod.POST)
-    public String uploadOne(HttpServletRequest req, @RequestParam("file") MultipartFile file, @RequestParam("username") String userName) {
+    public String uploadOne(HttpServletRequest req, @RequestParam("file") MultipartFile file) {
     	   String fileName = "";
+    	   String imagUrl = "";
            try {           
             	fileName = System.currentTimeMillis()+file.getOriginalFilename();
                 String destFileName=req.getServletContext().getRealPath("")+"uploaded"+File.separator+fileName;
@@ -93,12 +97,13 @@ public class UploadController {
                 .outputQuality(1f) //保持质量
                 .rotate(getRotateAngleForPhoto(destFileName)) //旋转图片
                 .toFile(destFileName2); //目标地址    
-            } catch (FileNotFoundException e) {
+                imagUrl = "http://" + req.getServerName() + ":" + req.getServerPort() + "/" + "imags/" + fileName;
+           } catch (FileNotFoundException e) {
                e.printStackTrace();
             } catch (IOException e) {
                e.printStackTrace();
             }
-          return "http://" + req.getServerName() + ":" + req.getServerPort() + "/" + "imags/" + fileName;
+          return imagUrl;
     }
   	 
   	/**

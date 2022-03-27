@@ -18,7 +18,7 @@ public interface NewsMapper {
 	@Select("select * from news_content order by date desc")
     List<NewsContent> findAll();
      
-    @Insert(" insert into news_content ( username, nickname, title, newscontent, date ) values (#{userName}, #{nickName}, #{title}, #{newsContent}, #{date}) ")
+    @Insert(" insert into news_content ( username, nickname, title, newscontent, date, usericon ) values (#{userName}, #{nickName}, #{title}, #{newsContent}, #{date}, #{userIcon}) ")
     public int save(NewsContent newsContent); 
      
     @Delete(" delete from news_content where id= #{id} ")
@@ -30,7 +30,7 @@ public interface NewsMapper {
     @Select("select * from news_content where username= #{userName} order by date desc")
     public List<NewsContent> getMany(String userName); //获取该用户所有的文章
        
-    @Update("update news_content set title=#{title}, newscontent=#{newsContent}, date=#{date} where id=#{id} ")
+    @Update("update news_content set title=#{title}, newscontent=#{newsContent}, date=#{date}, usericon=#{userIcon} where id=#{id} ")
     public int update(NewsContent newsContent); 
 
     @Select("select * from news_content where id in ( select newsId from fav_news where username = #{userName} ) ")

@@ -42,12 +42,13 @@ public class UserController {
 	    }
 	    
 	    @PostMapping("/user/update")
-	    public String update(@RequestParam("username") String userName,@RequestParam("nickname") String nickName, @RequestParam("sex") String sex, @RequestParam("sign") String sign) throws Exception {
+	    public String update(@RequestParam("username") String userName,@RequestParam("nickname") String nickName, @RequestParam("sex") String sex, @RequestParam("sign") String sign, @RequestParam("userIcon") String userIcon) throws Exception {
 	    	User user = new User();
 	    	user.setUserName(userName);
 	    	user.setNickName(nickName);
 	    	user.setSex(sex);
 	    	user.setSign(sign);
+	    	if(!userIcon.equals("")) user.setUserIcon(userIcon);
 	    	int id = userMapper.update(user);
 	    	if (id == 1) return "success";
 	        return "fail";

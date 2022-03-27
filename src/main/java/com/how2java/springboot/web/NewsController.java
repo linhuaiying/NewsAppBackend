@@ -28,11 +28,13 @@ public class NewsController {
 		Date date = new Date(System.currentTimeMillis());
 		System.out.println(formatter.format(date));
 		String nickName = userMapper.getNickName(userName);
+		String userIcon = userMapper.getUserIcon(userName);
 		newsContent.setNewsContent(content);
 		newsContent.setUserName(userName);
 		newsContent.setDate(formatter.format(date));
 		newsContent.setTitle(title);
 		newsContent.setNickName(nickName);
+		newsContent.setUserIcon(userIcon);
 		int id = newsMapper.save(newsContent);
 		if (id == 1) return "success";
         return "fail";

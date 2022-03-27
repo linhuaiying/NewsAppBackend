@@ -17,7 +17,7 @@ public interface CommentMapper {
 	@Select("select * from comment where newsId = #{newsId}")
     List<Comment> getMany(int newsId);
      
-    @Insert(" insert into comment ( username, nickname, content, newsId ) values (#{userName}, #{nickName}, #{content}, #{newsId}) ")
+    @Insert(" insert into comment ( username, nickname, content, newsId, usericon ) values (#{userName}, #{nickName}, #{content}, #{newsId}, #{userIcon}) ")
     public int save(Comment comment); 
     
 }

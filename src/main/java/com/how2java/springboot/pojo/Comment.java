@@ -7,6 +7,7 @@ public class Comment {
 	String userName;
     String nickName;
     String content;
+    String userIcon;
     int newsId; //所对应新闻id
     int id;
 
@@ -42,6 +43,14 @@ public class Comment {
         this.newsId = newsId;
     }
     
+    public String getUserIcon() {
+   	   return this.userIcon;
+     }
+      
+    public void setUserIcon(String userIcon) {
+   	   this.userIcon = userIcon;
+    }
+     
     public int getId() {
         return id;
     }

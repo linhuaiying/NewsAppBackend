@@ -27,10 +27,12 @@ public interface UserMapper {
     @Select("select * from user_ where username= #{userName} ")
     public User get(String userName);
        
-    @Update("update user_ set nickname=#{nickName}, sex=#{sex}, sign=#{sign} where username=#{userName} ")
+    @Update("update user_ set nickname=#{nickName}, sex=#{sex}, sign=#{sign}, usericon=#{userIcon} where username=#{userName} ")
     public int update(User user);  //更改用户信息
     
     @Select("select nickname from user_ where username= #{userName} ")
     public String getNickName(String userName);
     
+    @Select("select usericon from user_ where username= #{userName} ")
+    public String getUserIcon(String userName);
 }

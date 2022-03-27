@@ -9,6 +9,7 @@ public class NewsContent {
     String date;
     String title;
     String nickName;
+    String userIcon;
     int id;
     
     public String getUserName() {
@@ -49,6 +50,14 @@ public class NewsContent {
     
     public void setTitle(String title) {
         this.title = title;
+    }
+    
+    public String getUserIcon() {
+  	   return this.userIcon;
+    }
+     
+    public void setUserIcon(String userIcon) {
+  	   this.userIcon = userIcon;
     }
     
     public int getId() {
