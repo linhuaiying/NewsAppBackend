@@ -66,4 +66,11 @@ public class NewsController {
     	List<NewsContent> newsList = newsMapper.getFavNews(userName);
 		return newsList;
 	}
+    
+    @GetMapping("/news/getSearchNewsList")
+    public List<NewsContent> getSearchNewsList(@RequestParam(value = "keywords", defaultValue = "") String keyWords) {
+    	List<NewsContent> newsList = null;
+    	if(!keyWords.equals("")) newsList = newsMapper.getSearchNews(keyWords);
+		return newsList;
+	}
 }

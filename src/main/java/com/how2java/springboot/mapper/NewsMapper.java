@@ -35,4 +35,7 @@ public interface NewsMapper {
 
     @Select("select * from news_content where id in ( select newsId from fav_news where username = #{userName} ) ")
     public List<NewsContent> getFavNews(String userName);
+    
+    @Select("select * from news_content where title like concat('%', #{keyWord}, '%') ")
+    public List<NewsContent> getSearchNews(String keyWords);
 }
