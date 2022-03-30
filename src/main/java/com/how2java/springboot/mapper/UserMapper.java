@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -35,4 +36,26 @@ public interface UserMapper {
     
     @Select("select usericon from user_ where username= #{userName} ")
     public String getUserIcon(String userName);
+    
+    @Select("select * from user_ where username= #{userName} ")
+    public List<User> getUsersListByUserName(String userName);
+    
+    @Select("select * from concern_user where username= #{userName} and concern_username=#{keyWords} ")
+    public List<User> getConcernUsersListByUserName(@Param("userName") String userName, @Param("keyWords") String keyWords);
+    
+    @Select("select * from user_ where nickname like concat('%', #{nickName}, '%') ")
+    public List<User> getUsersListByNickName(String nickName);
+    
+    @Select("select * from user_ where username in ( select concern_username from concern_user where username = #{userName} ) and nickname like concat('%', #{nickName}, '%') ")
+    public List<User> getConcernUsersListByNickname(@Param("userName") String userName, @Param("nickName") String nickName);
+    
+    @Select("select * from user_ where username not in ( select concern_username from concern_user where username = #{userName} ) and nickname like concat('%', #{nickName}, '%') ")
+    public List<User> getNoConcernUsersListByNickname(@Param("userName") String userName, @Param("nickName") String nickName);
+    
+    @Insert(" insert into concern_user ( username, concern_username ) values (#{userName}, #{concernUsername}) ")
+    public int concernUser(@Param("userName") String userName, @Param("concernUsername") String concernUsername);
+    
+    @Select("select * from user_ where username in ( select concern_username from concern_user where username = #{userName} ) ")
+    public List<User> getConcernUser(String userName);
+    
 }
