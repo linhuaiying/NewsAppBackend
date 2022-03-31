@@ -55,7 +55,13 @@ public interface UserMapper {
     @Insert(" insert into concern_user ( username, concern_username ) values (#{userName}, #{concernUsername}) ")
     public int concernUser(@Param("userName") String userName, @Param("concernUsername") String concernUsername);
     
+    @Delete("delete from concern_user where username=#{userName} and concern_username=#{concernUsername} ")
+    public int noconcernUser(@Param("userName") String userName, @Param("concernUsername") String concernUsername);
+    
     @Select("select * from user_ where username in ( select concern_username from concern_user where username = #{userName} ) ")
     public List<User> getConcernUser(String userName);
+    
+    @Select("select * from user_ where username in ( select username from concern_user where concern_username = #{userName} ) ")
+    public List<User> getFans(String userName);
     
 }

@@ -1,6 +1,7 @@
 package com.how2java.springboot.web;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -91,9 +92,42 @@ public class UserController {
 	    	return map;
 	    }
 	    
+	    @PostMapping("/user/getMyFans")
+	    public Map<String, List<User>> getFans(@RequestParam("username") String userName) throws Exception {
+	    	List<User> concernUsers = new ArrayList<User>();
+	    	List<User> concernFans = new ArrayList<User>();
+	    	List<User> noconcernFans = new ArrayList<User>();
+	    	List<User> fans = new ArrayList<User>();
+	    	Map<String, List<User>> map = new HashMap<String, List<User>>();
+	    	boolean flag = false;
+	    	fans = userMapper.getFans(userName); //用户的全部粉丝
+	    	concernUsers = userMapper.getConcernUser(userName); //用户的全部关注
+            for(int i = 0; i < fans.size(); i++) {
+            	flag = false;
+            	for(int j = 0; j < concernUsers.size(); j++) {
+            		if(fans.get(i).getUserName().equals(concernUsers.get(j).getUserName())) {
+            			concernFans.add(fans.get(i));
+            			flag = true;
+            			break;
+            		}
+            	}
+            	if(!flag) noconcernFans.add(fans.get(i));
+            }
+	    	map.put("concern", concernFans);
+	    	map.put("noconcern", noconcernFans);
+	    	return map;
+	    }
+	    
 	    @PostMapping("/user/concern")
 	    public String concernUser(@RequestParam("username") String userName, @RequestParam("concernUsername") String concernUsername) throws Exception {
 	    	int id = userMapper.concernUser(userName, concernUsername);
+	    	if(id > 0) return "success";
+	    	return "fail";
+	    }
+	    
+	    @PostMapping("/user/noconcern")
+	    public String noconcernUser(@RequestParam("username") String userName, @RequestParam("concernUsername") String concernUsername) throws Exception {
+	    	int id = userMapper.noconcernUser(userName, concernUsername);
 	    	if(id > 0) return "success";
 	    	return "fail";
 	    }
