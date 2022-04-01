@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.how2java.springboot.mapper.NewsMapper;
 import com.how2java.springboot.mapper.UserMapper;
-import com.how2java.springboot.pojo.FavNews;
 import com.how2java.springboot.pojo.NewsContent;
 
 @RestController
