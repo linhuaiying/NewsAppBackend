@@ -2,6 +2,7 @@ package com.how2java.springboot.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -19,5 +20,11 @@ public interface CommentMapper {
      
     @Insert(" insert into comment ( username, nickname, content, newsId, usericon ) values (#{userName}, #{nickName}, #{content}, #{newsId}, #{userIcon}) ")
     public int save(Comment comment); 
+    
+    @Select("select * from comment")
+    List<Comment> findAll();
+    
+    @Delete(" delete from comment where id= #{id} ")
+    public void delete(int id);
     
 }

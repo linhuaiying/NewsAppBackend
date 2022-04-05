@@ -63,6 +63,11 @@ public class UserController {
 	    	return user;
 	    }
 	    
+	    @PostMapping("/user/delete")
+	    public void deleteUser(@RequestParam("username") String userName) throws Exception {
+	    	userMapper.delete(userName);
+	    }
+	    
 	    @GetMapping("/user/getUserList")
 	    public List<User> getUsers() throws Exception {
 	    	List<User> users = userMapper.findAll();

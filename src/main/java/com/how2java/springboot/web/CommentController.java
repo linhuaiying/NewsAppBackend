@@ -3,6 +3,7 @@ package com.how2java.springboot.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,17 @@ public class CommentController {
     public List<Comment> getComments(@RequestParam(value = "newsId", defaultValue = "") int newsId) {
 		List<Comment> comments = commentMapper.getMany(newsId);
 		return comments;
+	}
+    
+    @GetMapping("comment/getAllComments")
+    public List<Comment> getAllComments() {
+		List<Comment> comments = commentMapper.findAll();
+		return comments;
+	}
+    
+    @PostMapping("comment/delete")
+    public void delete(@RequestParam(value = "id", defaultValue = "") int id) {
+		commentMapper.delete(id);
 	}
     
 }
