@@ -74,6 +74,18 @@ public class UserController {
 	    	return users;
 	    }
 	    
+	    @PostMapping("/user/getUsersListByUserName")
+	    public List<User> getUsersListByUserName(@RequestParam("username") String userName) throws Exception {
+	    	List<User> users = userMapper.getUsersListByUserName(userName);
+	    	return users;
+	    }
+	    
+	    @PostMapping("/user/getUsersListByNickName")
+	    public List<User> getUsersListByNickName(@RequestParam("keyWords") String keyWords) throws Exception {
+	    	List<User> users = userMapper.getUsersListByNickName(keyWords);
+	    	return users;
+	    }
+	    
 	    @PostMapping("/user/getUsers")
 	    public Map<String, List<User>> getUserList(@RequestParam("userName") String userName, @RequestParam("keyWords") String keyWords) throws Exception {
 	    	List<User> concernUsers = null;
